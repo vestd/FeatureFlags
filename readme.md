@@ -4,10 +4,8 @@
 
 First, pull in the package through Composer.
 
-```js
-"require": {
-    "vestd/feature-flags": "~1.0"
-}
+```bash
+composer require vestd/feature-flags
 ```
 
 And then, if using Laravel 5, include the service provider within `app/config/app.php`.
@@ -16,6 +14,12 @@ And then, if using Laravel 5, include the service provider within `app/config/ap
 'providers' => [
     'Vestd\FeatureFlags\FeatureFlagServiceProvider'
 ];
+```
+
+And finally publish the config file, this will be where you put the feature flag configuration
+
+```bash
+php artisan vendor:publish --provider="Vestd\FeatureFlags\FeatureFlagServiceProvider"
 ```
 
 ## Usage in Laravel
