@@ -86,5 +86,5 @@ The ability to configure the flags through a method other than a fixed config fi
 
 ## Contributing
 
-Contributions are accepted but this package is being developed primarily for use within the Vestd app so if you use case
-differs to much from what we need it may not be accepted.
+Contributions are accepted but this package is being developed primarily for use within the Vestd app so if your use case
+differs too much from what we need it may not be accepted.
