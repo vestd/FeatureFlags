@@ -1,5 +1,7 @@
 # Feature flags
 
+This is a basic Laravel 5 package for implementing feature flags.
+
 ## Installation
 
 First, pull in the package through Composer.
@@ -12,7 +14,7 @@ And then, if using Laravel 5, include the service provider within `app/config/ap
 
 ```php
 'providers' => [
-    'Vestd\FeatureFlags\FeatureFlagServiceProvider'
+    Vestd\FeatureFlags\FeatureFlagServiceProvider::class
 ];
 ```
 
@@ -24,12 +26,14 @@ php artisan vendor:publish --provider="Vestd\FeatureFlags\FeatureFlagServiceProv
 
 ## Usage in Laravel
 
-Within your codebase use Laravel's dependency injection to load in the FeatureFlags container
+Within your codebase use Laravel's dependency injection to load in the FeatureFlags container.
+You can then call the get method to retrieve a previously configured feature flag.
+If the flag doesn't exist an exception will be thrown.
 
 ```php
-public function index(FeatureFlags $featureFlags)
+public function index(FeatureCollection $featureCollection)
 {
-    $feature = $featureFlags->get('new_home_page');
+    $feature = $featureCollection->get('new_home_page');
 
     if ($feature->isEnabled()) {
         view('new_homepage');
@@ -73,3 +77,14 @@ public function index(FeatureFlags $featureFlags)
     }
 }
 ```
+
+
+## Coming soon
+
+The ability to configure the flags through a method other than a fixed config file, i.e. a database
+
+
+## Contributing
+
+Contributions are accepted but this package is being developed primarily for use within the Vestd app so if you use case
+differs to much from what we need it may not be accepted.
