@@ -16,21 +16,12 @@ class FeatureFlagServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/feature-flags.php' => $this->app->make('path.config').'feature-flags',
+            __DIR__.'/../config/feature-flags.php' => $this->app->make('path.config').'/feature-flags.php',
         ]);
 
-        $features = $this->app->make('config')->get('feature-flags');
+        //Fetch the flags from the config file and register a singleton feature collection for them
 
-        /*
-        $features = [
-            'id_checking'       => false,
-            'company_formation' => true,
-            'company_dashboard' => [
-                'users'  => [123, 456],
-                'groups' => ['beta', 'admin']
-            ]
-        ];
-        */
+        $features = $this->app->make('config')->get('feature-flags');
 
         $this->app->singleton(FeatureCollection::class, function() use($features) {
             $featureFlags = new FeatureCollection();
