@@ -23,8 +23,10 @@ class FeatureCollection
     }
 
     /**
-     * @param string $featureLabel
-     * @param bool   $status
+     * Set an individual feature and its status
+     *
+     * @param string     $featureLabel
+     * @param bool|array $status
      */
     public function setFeatureStatus($featureLabel, $status)
     {
@@ -42,6 +44,8 @@ class FeatureCollection
     }
 
     /**
+     * This receives an array of features and either a boolean status or a more complex matrix of valid users/groups
+     *
      * @param array $features
      */
     public function setFeatures(array $features)

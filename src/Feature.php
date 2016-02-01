@@ -20,11 +20,20 @@ class Feature
     private $type;
 
     /**
+     * In the supplied config array these are the types of filter groups supported
+     *
      * @var array
      */
-    private $validTypes = ['groups', 'users'];
+    private $validFlagStatusGroups = ['groups', 'users'];
 
+    /**
+     * A basic boolean feature flag, enabled or disabled for all
+     */
     const BOOLEAN_TYPE = 'boolean';
+
+    /**
+     * A complex flag type, its status will be determined by the supplied group or user id
+     */
     const MATRIX_TYPE = 'matrix';
 
     /**
@@ -61,7 +70,7 @@ class Feature
         $this->type = self::MATRIX_TYPE;
         $this->status = [];
 
-        foreach ($this->validTypes as $type) {
+        foreach ($this->validFlagStatusGroups as $type) {
             if (isset($status[$type])) {
                 $this->status[$type] = [];
                 foreach ($status[$type] as $user) {
@@ -114,8 +123,8 @@ class Feature
      */
     private function isEnabledFor($id, $type)
     {
-        if (!in_array($type, $this->validTypes)) {
-            throw new InvalidOptionException("Unsupported type, " . $type . " not in " . implode(',', $this->validTypes));
+        if (!in_array($type, $this->validFlagStatusGroups)) {
+            throw new InvalidOptionException("Unsupported type, " . $type . " not in " . implode(',', $this->validFlagStatusGroups));
         }
         //If this is a boolean feature just return that status
         if ($this->type == self::BOOLEAN_TYPE) {
